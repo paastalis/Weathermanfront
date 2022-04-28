@@ -1,0 +1,145 @@
+
+<div class="float-container" style="margin-top: 10px; float:left; height: 800px; width: 1550px" >
+    <div class="d-flex justify-content-center h-50">
+      <div class="float-child">
+        <div class="user_card">
+          <div class="d-flex justify-content-center">
+            <div style="margin-top: 10px;margin-bottom:-90px;">
+              <h3>Weatherman</h3>
+              Enter the latitude and longitude and compare different weather forecasts for that location. <br>
+              The amount of days entered determines how far into the future the forecasts will reach.
+            </div>
+          </div>
+          
+          <div class="d-flex justify-content-center form_container">
+            
+            <form #weatherForm="ngForm" (ngSubmit)="onSubmit(weatherForm.value)">
+              <span class="help-block" style="color:red;"
+              *ngIf="latitudeInput.invalid && latitudeInput.touched">Please enter a latitude</span>
+              
+              <div class="input-group mb-3">
+                <div class="input-group-append">
+                  <span class="input-group-text"><i class="fas fa-globe"></i></span>
+                <input type="number" class="form-control" name="latitude" placeholder="Latitude (-90 to 90)" ngModel
+                #latitudeInput="ngModel" required>
+              </div>
+              </div>
+              
+              <span class="help-block" style="color:red;"
+              *ngIf="longitudeInput.invalid && longitudeInput.touched">Please enter a longitude</span>
+              
+              <div class="input-group mb-3">
+                <div class="input-group-append">
+                  <span class="input-group-text"><i class="fas fa-globe"></i></span>
+                <input type="number" class="form-control" name="longitude" placeholder="Longitude (-180 to 180)" ngModel
+                #longitudeInput="ngModel" required>
+              </div>
+            </div>
+              
+              <span class="help-block" style="color:red;"
+              *ngIf="daysInput.invalid && daysInput.touched">Please enter amount of days.</span>
+              
+              <div class="input-group mb-2">
+                <div class="input-group-append">
+                  <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                </div>
+                <input type="number" class="form-control" name="amountOfDays" placeholder="Amount of days (1 - 14)"
+                ngModel
+                #daysInput="ngModel" required>
+              </div>
+            
+          <div class="d-flex justify-content-center mt-3 content_container">
+            <button type="submit" [disabled]="weatherForm.invalid || showLoading" name="button" class="btn save_btn">
+              <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;
+              <span>Forecast</span>
+            </button>
+          </div>
+        </form>
+      </div>
+        </div>
+      </div>
+      
+<div class="float-child">
+  <div class="row mb-2 mt-2 text-center">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+    </div>
+  </div>
+  <div id="map" style="width: 100%">
+    <iframe width="100%" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" [src]="safeSrc">
+    </iframe>
+  </div> 
+  
+   
+     
+
+
+  <div class="float-container">
+  <!-- main content -->
+  <div *ngIf="submitted">
+      <div>The date today is {{currentDate}}. Current temperature is {{currentTemp}} degrees Celsius and there are {{currentPrecip}}mm of precipitations.</div>
+      <div>Under each date in the table are the temperature and precipitation values from the respective API. </div>
+  </div>
+  <div class="m- auto table-responsive-sm w-auto">
+  <table class="table table-dark">
+      <thead class="thead-dark">
+        <tr>
+          <th>Date</th>
+          <th scope="col" class="col-md-auto" *ngFor="let weather of miniList; let i=index">
+            <li>{{miniList[i]?.date}}</li>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+          
+        <tr>
+          <th scope="row">Weatherbit API</th>
+          <td *ngFor="let subList of miniList; let i=index">{{weatherList[0][i]?.temperature}}C°  |  {{weatherList[0][i]?.precipitation}}mm</td>
+
+        </tr>
+        <tr>
+          <th scope="row">Visualcrossing API</th>
+          <td *ngFor="let subList of miniList; let i=index">{{weatherList[1][i]?.temperature}}C°   |  {{weatherList[1][i]?.precipitation}}mm</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-center mt-3 content_container">
+      <button type="button" name="button2" class="btn save_btn" (click)="saveForecast(submittedData)">
+        <span>Save forecasts</span>
+        
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+<div class="float-section">
+  <h4>{{savedString}}</h4>
+<div><div class="m- auto table-responsive-sm w-auto">
+  <table class="table table-dark">
+      <thead class="thead-dark">
+        <tr>
+          <th>Date</th>
+          <th scope="col" class="col-md-auto" *ngFor="let weather of miniSavedWeatherList; let i=index">
+            <li>{{miniSavedWeatherList[i].date}}</li>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+          
+        <tr>
+          <th scope="row">Weatherbit API</th>
+          <td *ngFor="let subList of miniSavedWeatherList; let i=index">{{savedWeatherList[0][i].temperature}}C°  |  {{savedWeatherList[0][i].precipitation}}mm</td>
+
+        </tr>
+        <tr>
+          <th scope="row">Visualcrossing API</th>
+          <td *ngFor="let subList of miniSavedWeatherList; let i=index">{{savedWeatherList[1][i].temperature}}C°   |  {{savedWeatherList[1][i].precipitation}}mm</td>
+        </tr>
+      </tbody>
+    </table></div>
+</div>
+  

@@ -1,4 +1,4 @@
-Coded with love by Mutiullah Samim
+
 body,
 html {
     margin: 0;
@@ -8,7 +8,7 @@ html {
 }
 .user_card {
     height: 500px;
-    width: 600px;
+    width: 700px;
     margin-top: auto;
     margin-bottom: auto;
     background: #afbfd8;
@@ -23,35 +23,31 @@ html {
     border-radius: 5px;
 
 }
-.brand_logo_container {
-    position: absolute;
-    height: 170px;
-    width: 170px;
-    top: -75px;
-    border-radius: 50%;
-    background: #60a3bc;
-    padding: 10px;
-    text-align: center;
-}
-.brand_logo {
-    height: 150px;
-    width: 150px;
-    border-radius: 50%;
-    border: 2px solid white;
-}
+
 .form_container {
     margin-top: 100px;
 }
-.login_btn {
+.save_btn {
     width: 70%;
     background: rgb(44, 85, 35)!important;
     color: white !important;
 }
-.login_btn:focus {
+.save_btn:focus {
     box-shadow: none !important;
     outline: 0px !important;
 }
-.login_container {
+
+.save_btn {
+    width: 70%;
+    background: rgb(44, 85, 35)!important;
+    color: white !important;
+}
+.save_btn:focus {
+    box-shadow: none !important;
+    outline: 0px !important;
+}
+
+.content_container {
     padding: 0 2rem;
 }
 .input-group-text {
@@ -65,6 +61,25 @@ html {
     box-shadow: none !important;
     outline: 0px !important;
 }
-.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
-    background-color: #1B4F72!important;
+
+.float-container {
+    /* border: 3px solid rgb(59, 53, 53); */
+    padding: 20px;
 }
+
+.float-child {
+    width: 50%;
+    height: 100%;
+    padding: 20px;
+    /* border: 2px solid red; */
+}  
+.float-section {
+    width: 50%;
+    height: 300px;
+    padding: 20px;
+    /* border: 2px solid rgb(21, 114, 221); */
+    margin-top: 250px;
+    margin-left: 20px;
+
+}
+
